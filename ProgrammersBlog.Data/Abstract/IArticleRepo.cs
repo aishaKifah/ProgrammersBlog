@@ -1,7 +1,7 @@
-﻿using programamersBlog.Shared.Data.Abstract;
-using programmersBlog.Entities.Concrete;
+﻿using ProgrammersBlog.Entities.Concrete;
+using ProgrammersBlog.Shared.Data.Abstract;
 
-namespace programmersBlog.Data.Abstract
+namespace ProgrammersBlog.Data.Abstract
 {
     public interface IArticleRepo : IEntityRepo<Article>
     {

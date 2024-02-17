@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ProgrammersBlog.Services</name>
+    </assembly>
+    <members>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.GetCategoryUpdateDtoAsync(System.Int32)">
+            <summary>
+            Returns the CategoryDto represntation of the input categoryId 
+            </summary>
+            <param name="categoryId"> categoryId >0</param>
+            <returns>Using async operation returns DataResult type as a Task  </returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.Abstract.ICategoryService.AddAsync(ProgrammersBlog.Entities.Dtos.CategoryAddDto,System.String)">
+             <summary>
+            Adds a new Category to dataBase using uniitofwork 
+             </summary>
+             <param name="categoryAddto"> CategoryAddDto type to be added </param>
+             <param name="createdByname"> string represntaion of the Catgory creator </param>
+             <returns>Using Async operation returns DataResult as Task </returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.CategoryManager.AddAsync(ProgrammersBlog.Entities.Dtos.CategoryAddDto,System.String)">
+             <summary>
+            Adds a new Category to dataBase using uniitofwork 
+             </summary>
+             <param name="categoryAddto"> CategoryAddDto type to be added </param>
+             <param name="createdByname"> string represntaion of the Catgory creator </param>
+             <returns>Using Async operation returns DataResult as Task </returns>
+        </member>
+        <member name="M:ProgrammersBlog.Services.CategoryManager.GetCategoryUpdateDtoAsync(System.Int32)">
+            <summary>
+            Returns the CategoryDto represntation of the input categoryId 
+            </summary>
+            <param name="categoryId"> categoryId >0</param>
+            <returns>Using async operation returns DataResult type as a Task  </returns>
+        </member>
+    </members>
+</doc>

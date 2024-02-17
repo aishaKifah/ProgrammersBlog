@@ -1,26 +1,17 @@
-﻿using programamersBlog.Shared.Entities.Abstract;
+﻿using Microsoft.AspNetCore.Identity;
+using ProgrammersBlog.Shared.Data.Abstract;
+using ProgrammersBlog.Shared.Entities.Abstract;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace programmersBlog.Entities.Concrete
+namespace ProgrammersBlog.Entities.Concrete
 {
-    public class User : EntityBase, IEntity
+    public class User : IdentityUser<int>, IEntity
     {
         public String picture { get; set; }
 
-        public int id { get; set; }
-        public String firstName { get; set; }
-        public String lastName { get; set; }
-        public String email { get; set; }
-        public byte[] passwordHash { get; set; }
-        public String userName { get; set; }
-        public int roleId { get; set; }
-        public Role role { get; set; }
-        public String discreption { get; set; }
-        public ICollection<Article> articles { get; set; }
+
+        public ICollection<Article> Articles { get; set; }
 
 
     }

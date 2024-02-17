@@ -1,13 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using programmersBlog.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using ProgrammersBlog.Entities.Concrete;
 
-namespace programmersBlog.Data.Concrete.EntityFramework.Mappings
+namespace ProgrammersBlog.Data.Concrete.EntityFramework.Mappings
 {
     class CommentMap : IEntityTypeConfiguration<Comment>
     {
@@ -17,8 +12,6 @@ namespace programmersBlog.Data.Concrete.EntityFramework.Mappings
             builder.Property(c => c.id).ValueGeneratedOnAdd();
             builder.Property(c => c.text).IsRequired(true);
             builder.Property(c => c.text).HasColumnType("NVARCHAR(MAX)");
-            builder.HasOne<Article>(c => c.article).WithMany(a => a.comments).HasForeignKey(c=>c.articleId);
-            builder.ToTable("Comments");
             builder.Property(c => c.createdByname).IsRequired(true);
             builder.Property(c => c.modifiedByName).IsRequired(true);
             builder.Property(c => c.createdDate).IsRequired(true);
@@ -28,6 +21,8 @@ namespace programmersBlog.Data.Concrete.EntityFramework.Mappings
             builder.Property(c => c.isActive).IsRequired(true);
             builder.Property(c => c.isDeleted).IsRequired(true);
             builder.Property(c => c.note).HasMaxLength(500);
+            builder.ToTable("Comments");
+
         }
     }
 }

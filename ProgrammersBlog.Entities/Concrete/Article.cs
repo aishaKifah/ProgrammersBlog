@@ -1,30 +1,27 @@
-﻿using programamersBlog.Shared.Entities.Abstract;
+﻿using ProgrammersBlog.Shared.Entities.Abstract;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-namespace programmersBlog.Entities.Concrete
+namespace ProgrammersBlog.Entities.Concrete
 {
 
     public class Article : EntityBase, IEntity
     {
         public int id;
 
-        public String tilte { get; set; }
+        public String title { get; set; }
         public String content { get; set; }
         public String thumbnail { get; set; }//resmin yolu
         public DateTime Date { get; set; }
-        public int  viewsCount { get; set; }
-        public int commentsCount { get; set; }
+        public int ViewsCount { get; set; } = 0;
+        public int CommentsCount { get; set; } = 0;
         public String seoDescreption { get; set; }
         public String seoTags { get; set; }
         public String seoAouther { get; set; }
-        public ICollection<Comment> comments { get; set; }
-        public int categoryId { get; set; }
-        public Category category { get; set; }
+        public int CategoryId { get; set; }
+        public Category Category { get; set; }
 
         public int userID { get; set; }
         public User user { get; set; }
+
+
     }
 }

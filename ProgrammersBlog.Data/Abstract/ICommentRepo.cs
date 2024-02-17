@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using programmersBlog.Entities.Concrete;
-using programamersBlog.Shared.Data.Abstract;
-namespace programmersBlog.Data.Abstract
+﻿using ProgrammersBlog.Entities.Concrete;
+using ProgrammersBlog.Shared.Data.Abstract;
+
+namespace ProgrammersBlog.Data.Abstract
 {
-    public interface ICommentRepo: IEntityRepo<Comment>
+    public interface ICommentRepo : IEntityRepo<Comment>
     {
     }
 }

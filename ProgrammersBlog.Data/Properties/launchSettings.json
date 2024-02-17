@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "ProgrammersBlog.Data": {
+      "commandName": "Project"
+    },
+    "Docker": {
+      "commandName": "Docker"
+    }
+  }
+}

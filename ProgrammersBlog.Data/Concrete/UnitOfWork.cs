@@ -1,31 +1,25 @@
-﻿using programmersBlog.Data.Abstract;
-using programmersBlog.Data.Concrete.EntityFramework.Contexts;
-using programmersBlog.Data.Concrete.EntityFramework.Repos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using ProgrammersBlog.Data.Abstract;
+using ProgrammersBlog.Data.Concrete.EntityFramework.Contexts;
+using ProgrammersBlog.Data.Concrete.EntityFramework.Repos;
 using System.Threading.Tasks;
 
-namespace programmersBlog.Data.Concrete
+namespace ProgrammersBlog.Data.Concrete
 {
     public class UnitOfWork : IUnitOfWork
     {
         private readonly ProgrammerBlogContext _context;
-        private EfArticleRepo articleRepo;
+        public UnitOfWork(ProgrammerBlogContext context)
+        {
+            _context = context;
+        }
+        private EfArticleRepo ArticleRepo;
         private EfcategoryRepo categoryRepo;
         private EfCommentRepo commentRepo;
-        private EfRoleRepo roleRepo;
-        private EfUserRepo userRepo;
-        public IArticleRepo aticles => articleRepo ?? new EfArticleRepo(_context);
-        public ICategoryRepo categories => categoryRepo ?? new EfcategoryRepo(_context);
-        public IRoleRepo roles => roleRepo ?? new EfRoleRepo(_context);
-        public ICommentRepo comments => new EfCommentRepo(_context);
-        public IUserRepo users => new EfUserRepo(_context);
-        public void Dispose()
-        {
-            throw new NotImplementedException();
-        }
+
+        public IArticleRepo Articles => ArticleRepo ?? new EfArticleRepo(_context);
+        public ICategoryRepo Categories => categoryRepo ?? new EfcategoryRepo(_context);
+
+        public ICommentRepo Comments => new EfCommentRepo(_context);
 
         public async ValueTask DisposeAsync()
         {

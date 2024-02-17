@@ -1,13 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using programmersBlog.Entities.Concrete;
+using ProgrammersBlog.Entities.Concrete;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace programmersBlog.Data.Concrete.EntityFramework.Mappings
+namespace ProgrammersBlog.Data.Concrete.EntityFramework.Mappings
 {
     class CategoryMAp : IEntityTypeConfiguration<Category>
     {
@@ -26,13 +22,13 @@ namespace programmersBlog.Data.Concrete.EntityFramework.Mappings
             builder.Property(c => c.modifiedDate).IsRequired(true);
             builder.Property(c => c.isActive).IsRequired(true);
             builder.Property(c => c.isDeleted).IsRequired(true);
-            builder.Property(c => c.note).HasMaxLength(500);
+            builder.Property(c => c.note).HasMaxLength(200);
             builder.HasData(
                 new Category
                 {
-                    id=1,
-                    Name="java",
-                    Description="java learning and developping ",
+                    id = 1,
+                    Name = "java",
+                    Description = "java learning and developping ",
                     createdByname = "initial registeration",
                     isActive = true,
                     isDeleted = false,

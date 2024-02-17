@@ -1,0 +1,5 @@
+SET IDENTITY_INSERT AspNetUsers ON
+
+INSERT INTO AspNetUsers (Id, picture,UserName,Email,PasswordHash,AccessFailedCount, PhoneNumberConfirmed,EmailConfirmed,TwoFactorEnabled,LockoutEnabled) VALUES (4,CONVERT(varbinary, 'defulteUser.png'), CONVERT(varbinary, 'adminUser'),CONVERT(varbinary, 'adminuser@gmail.com'),CONVERT(varbinary, '061a1c0ea20e6b5d90ace3c0d879304b52c751ef53e62ccf159e1fb21d954c2f'),0,'true','true','false','False');
+
+SET IDENTITY_INSERT AspNetUsers OFF 

@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using programamersBlog.Shared.Entities.Abstract;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace programmersBlog.Entities.Concrete
+namespace ProgrammersBlog.Entities.Concrete
 {
-    public class Role: EntityBase, IEntity
+    public class Role : IdentityRole<int>//int bu sinifin idisi in olacak anlamina gelir
     {
-        public int id { get; set; }
-        public String Name { get; set; }
-        public String Description { get; set; }
-        public ICollection <User> users { get; set; }
+
 
 
     }

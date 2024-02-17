@@ -1,18 +1,14 @@
-﻿using programmersBlog.Data.Abstract;
-using programmersBlog.Entities.Concrete;
+﻿using Microsoft.EntityFrameworkCore;
+using ProgrammersBlog.Data.Abstract;
+using ProgrammersBlog.Entities.Concrete;
+using ProgrammersBlog.Shared.Data.Concrete.EntityFramework;
 
-using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace programmersBlog.Data.Concrete.EntityFramework.Repos
+namespace ProgrammersBlog.Data.Concrete.EntityFramework.Repos
 {
-   public  class EfArticleRepo : EfEntityRepoBase<Article>, IArticleRepo
+    public class EfArticleRepo : EfEntityRepoBase<Article>, IArticleRepo
     {
-        public EfArticleRepo(DbContext context) : base(context) { 
+        public EfArticleRepo(DbContext context) : base(context)
+        {
         }
     }
 }

@@ -1,54 +1,90 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using programamersBlog.Shared.Data.Abstract;
-using programamersBlog.Shared.Entities.Abstract;
+using ProgrammersBlog.Shared.Data.Abstract;
+using ProgrammersBlog.Shared.Entities.Abstract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
 
 
-public class EfEntityRepoBase<TEntity> : IEntityRepo<TEntity> where TEntity : class, IEntity, new()
+
+namespace ProgrammersBlog.Shared.Data.Concrete.EntityFramework
 {
-    private readonly DbContext _context;
-    public EfEntityRepoBase(DbContext context)
+    public class EfEntityRepoBase<TEntity> : IEntityRepo<TEntity>
+    where TEntity : class, IEntity, new()
     {
-        _context = context;
-    }
-    public async Task AddAsync(TEntity entity)
-    {
-        throw new NotImplementedException();
-    }
+        protected readonly DbContext _context;
 
-    public async Task<bool> AnyAysnc(Expression<Func<TEntity, bool>> predicate)
-    {
-        throw new NotImplementedException();
-    }
+        public EfEntityRepoBase(DbContext context)
+        {
+            _context = context;
+        }
+        public async Task<TEntity> AddAsync(TEntity entity)
+        {
+            await _context.Set<TEntity>().AddAsync(entity);
+            return entity;
+        }
 
-    public async Task<int> CountAysnc(Expression<Func<TEntity, bool>> predicate)
-    {
-        throw new NotImplementedException();
-    }
-    //from c# 2.0 anonymous method inline unnamed method in the code.has the only body without a name, optional parameters and return type.
-    public async Task DeleteAsync(TEntity entuty)
-    {
-        throw new NotImplementedException();
-    }
+        public async Task<bool> AnyAsync(Expression<Func<TEntity, bool>> predicate)
+        {
+            return await _context.Set<TEntity>().AnyAsync(predicate);
+        }
 
-    public async Task<IList<TEntity>> GetAllAysnc(Expression<Func<TEntity, bool>> predicate = null, params Expression<Func<TEntity, object>>[] includeproperties)
-    {
-        throw new NotImplementedException();
-    }
+        public async Task<int> CountAsync(Expression<Func<TEntity, bool>> predicate=null)
+        {
+            // if the predicate is null it will return the count of all entities 
+           
+            return await (predicate==null? _context.Set<TEntity>().CountAsync(): _context.Set<TEntity>().CountAsync(predicate));
+        }
 
-    public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeproperties)
-    {
-        throw new NotImplementedException();
-    }
+        public async Task DeleteAsync(TEntity entity)
+        {
+            await Task.Run(() => { _context.Set<TEntity>().Remove(entity); });
+        }
 
-    public async Task UpdateAsync(TEntity entity)
-    {
-        throw new NotImplementedException();
+        public async Task<IList<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>> predicate = null, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            Console.WriteLine(value: includeProperties + "From EfEntityRepoBase");
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+            if (predicate != null)
+            {
+                query = query.Where(predicate);
+            }
+
+            if (includeProperties.Any())
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            return await query.ToListAsync();
+        }
+
+        public async Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> predicate, params Expression<Func<TEntity, object>>[] includeProperties)
+        {
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+
+            query = query.Where(predicate);
+
+
+            if (includeProperties.Any())
+            {
+                foreach (var includeProperty in includeProperties)
+                {
+                    query = query.Include(includeProperty);
+                }
+            }
+
+            return await query.SingleOrDefaultAsync();
+        }
+
+        public async Task<TEntity> UpdateAsync(TEntity entity)
+        {
+            await Task.Run(() => { _context.Set<TEntity>().Update(entity); });
+            return entity;
+        }
     }
 }
-

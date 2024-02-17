@@ -1,28 +1,27 @@
-﻿using Microsoft.EntityFrameworkCore;
-using programmersBlog.Data.Concrete.EntityFramework.Mappings;
-using programmersBlog.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
+using ProgrammersBlog.Data.Concrete.EntityFramework.Mappings;
+using ProgrammersBlog.Entities.Concrete;
 
-namespace programmersBlog.Data.Concrete.EntityFramework.Contexts
+namespace ProgrammersBlog.Data.Concrete.EntityFramework.Contexts
 {
-    public class ProgrammerBlogContext : DbContext
+    public class ProgrammerBlogContext : IdentityDbContext<User, Role, int, UserClaim, UserRole, UserLogin, RoleClaim, UserToken>
     {
         // db setleri hazirlama
         public DbSet<Article> Articles { get; set; }
         public DbSet<Category> Categories { get; set; }
-        public DbSet<Comment> comments { get; set; }
-        public DbSet<Role> roles { get; set; }
-        public DbSet<User> users { get; set; }
+        public DbSet<Comment> Comments { get; set; }
 
-        // db ile baglanma hazirlama
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        public ProgrammerBlogContext(DbContextOptions<ProgrammerBlogContext> options) : base(options)
         {
-            optionsBuilder.UseSqlServer(connectionString : @"Server=localhost;Database=master;Trusted_Connection=True;");
+
         }
+        // db ile baglanma hazirlama (bunu  servis katmanina tasidik  sql connection ayarimizi burada yaparsak dll dosyalarin icine gomulu olur. bu sefe deisiklik yapmak istersek tekrardan build etmek gerekecek bu dinamik projelerde olmaz)
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer(connectionString : @"Server=localhost;Database=programmersBlog;Trusted_Connection=True;");
+        //}
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new ArticleMap());
@@ -30,6 +29,11 @@ namespace programmersBlog.Data.Concrete.EntityFramework.Contexts
             modelBuilder.ApplyConfiguration(new CommentMap());
             modelBuilder.ApplyConfiguration(new RoleMap());
             modelBuilder.ApplyConfiguration(new UserMap());
+            modelBuilder.ApplyConfiguration(new RoleClaimMap());
+            modelBuilder.ApplyConfiguration(new UserClaimMap());
+            modelBuilder.ApplyConfiguration(new UserLoginMap());
+            modelBuilder.ApplyConfiguration(new UserRoleMap());
+            modelBuilder.ApplyConfiguration(new UserTokenMap());
 
         }
     }

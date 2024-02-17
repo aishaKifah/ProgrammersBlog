@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace programamersBlog.Shared.Entities.Abstract
+namespace ProgrammersBlog.Shared.Entities.Abstract
 {
     public abstract class EntityBase
     {
@@ -15,7 +10,7 @@ namespace programamersBlog.Shared.Entities.Abstract
         public virtual bool isDeleted { get; set; } = false;
         public virtual String createdByname { get; set; } = "Admin";
         public virtual String modifiedByName { get; set; } = "Admin";
-        public virtual String note { get; set; }  
+        public virtual String note { get; set; }
 
 
     }
